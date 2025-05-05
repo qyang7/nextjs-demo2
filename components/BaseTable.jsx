@@ -58,29 +58,31 @@ export default function BaseTable({columns = [], dataSource = [], queryFun, para
         <Skeleton className="h-4 w-[200px]"/>
         <Skeleton className="h-4 w-[250px]"/>
         <Skeleton className="h-4 w-[200px]"/>
-    </div> : <div >
-        <Table style={{width: '100%'}}>
-            <TableHeader>
-                <TableRow className={'bg-gray-100 font-bold'}>
-                    {
-                        columns.map((item, index) => <TableHead key={'TableHead'+index}>{item.title}</TableHead>)
-                    }
-                </TableRow>
-            </TableHeader>
-            {
-                list?.length > 0 && <TableBody>
-                    {list?.map((item, idx) => {
-                        return <TableRow key={'TableRow'+idx} style={{border: '1px solid #f0f0f0'}}>
-                            {columns.map(column =>
-                                <TableCell key={'TableRow'+idx + 'TableCell'+column.key}>
-                                    {column.type === 'index' ? idx + 1 : column.render ? column.render(item[column.key], item, idx) : item[column.key]}
-                                </TableCell>)}
-                        </TableRow>
-                    })}
-                </TableBody>
-            }
+    </div> :  <div>
+        <div  className="overflow-hidden rounded-lg border">
+            <Table style={{width: '100%'}}>
+                <TableHeader className="bg-muted sticky top-0 z-10">
+                    <TableRow className={'bg-gray-100 font-bold'}>
+                        {
+                            columns.map((item, index) => <TableHead key={'TableHead'+index}>{item.title}</TableHead>)
+                        }
+                    </TableRow>
+                </TableHeader>
+                {
+                    list?.length > 0 && <TableBody>
+                        {list?.map((item, idx) => {
+                            return <TableRow key={'TableRow'+idx}>
+                                {columns.map(column =>
+                                    <TableCell key={'TableRow'+idx + 'TableCell'+column.key}>
+                                        {column.type === 'index' ? idx + 1 : column.render ? column.render(item[column.key], item, idx) : item[column.key]}
+                                    </TableCell>)}
+                            </TableRow>
+                        })}
+                    </TableBody>
+                }
 
-        </Table>
+            </Table>
+        </div>
         {
           (!list || list.length === 0) && <div className={'flex justify-center items-center h-[200px]'}>
                 <div className={'flex flex-col items-center'}>
