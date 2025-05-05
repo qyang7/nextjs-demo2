@@ -16,7 +16,7 @@ import {
   IconReport,
   IconSearch,
   IconSettings,
-  IconUsers,
+
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/nav-documents"
@@ -42,7 +42,12 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/",
+      url: "/dashboard",
+      icon: IconDashboard,
+    },
+    {
+      title: "Rule Editor",
+      url: "/editorList",
       icon: IconDashboard,
     }
   ]
